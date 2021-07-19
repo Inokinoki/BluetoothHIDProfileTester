@@ -10,7 +10,12 @@ import android.bluetooth.BluetoothHidDevice;
 import android.bluetooth.BluetoothHidDeviceAppQosSettings;
 import android.bluetooth.BluetoothHidDeviceAppSdpSettings;
 import android.bluetooth.BluetoothProfile;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -186,6 +191,25 @@ import java.util.concurrent.ExecutorService;
          if (controller == null) {
              if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                  controller = new BluetoothProfileController();
+
+                 SensorManager sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+                 Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_GAME_ROTATION_VECTOR);
+                 if (sensor != null){
+                     // Success!
+                    sensorManager.registerListener(new SensorEventListener() {
+                        @Override
+                        public void onSensorChanged(SensorEvent event) {
+                            // Log.i("Sensor Data " + event.timestamp, "Lenght " + event.values.length);
+                        }
+
+                        @Override
+                        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+                            // Log.i("Accuracy changed", "to " + accuracy);
+                        }
+                    }, sensor, SensorManager.SENSOR_DELAY_FASTEST);
+                 } else {
+                     // Failure!
+                 }
 
                  ((Button)findViewById(R.id.left_button)).setOnClickListener(new View.OnClickListener() {
                      @Override
