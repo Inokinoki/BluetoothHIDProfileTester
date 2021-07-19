@@ -8,20 +8,22 @@ public class MouseReport {
     private byte []report = new byte[7];
     public static final int ID = 4;
 
-    public byte getDy() {
-        return report[2];
+    public short getDy() {
+        return (short)((short)report[3] | ((short)report[4] << 8));
     }
 
-    public void setDy(byte dy) {
-        report[2] = dy;
+    public void setDy(short dy) {
+        report[3] = (byte)(dy & 0xFF);
+        report[4] = (byte)((dy >> 8) & 0xFF);
     }
 
-    public byte getDx() {
-        return report[1];
+    public short getDx() {
+        return (short)((short)report[1] | ((short)report[2] << 8));
     }
 
-    public void setDx(byte dx) {
-        report[1] = dx;
+    public void setDx(short dx) {
+        report[1] = (byte)(dx & 0xFF);
+        report[2] = (byte)((dx >> 8) & 0xFF);
     }
 
     public boolean getLeftButton() {
@@ -38,6 +40,22 @@ public class MouseReport {
 
     public void setRightButton(boolean rightButton) {
         report[0] = rightButton ? (byte)(report[0] | 0b10) : (byte)(report[0] & 0b101);
+    }
+
+    public byte getVscroll() {
+        return report[6];
+    }
+
+    public void setVscroll(byte vscroll) {
+        report[5] = vscroll;
+    }
+
+    public byte getHscroll() {
+        return report[6];
+    }
+
+    public void setHscroll(byte hscroll) {
+        report[6] = hscroll;
     }
 
     public void reset() {
