@@ -48,6 +48,5 @@ public class MouseReport {
         report[4] = 0;
         report[5] = 0;
         report[6] = 0;
-        report[7] = 0;
     }
 }
