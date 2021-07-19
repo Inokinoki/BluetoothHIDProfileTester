@@ -91,6 +91,16 @@ import java.util.concurrent.ExecutorService;
                 mouseReport.setLeftButton(false);
                 sendMouse();
             }
+            public void sendTestLeftMove() {
+                mouseReport.setDx((short)-20);
+                sendMouse();
+                mouseReport.setDx((short)0);
+            }
+            public void sendTestRightMove() {
+                mouseReport.setDx((short)20);
+                sendMouse();
+                mouseReport.setDx((short)0);
+            }
         }
 
         /* Callback events */
@@ -188,6 +198,26 @@ import java.util.concurrent.ExecutorService;
                                  e.printStackTrace();
                              }
                              mouseSender.sendLeftClickOff();
+                         } else {
+                             Log.i("Test", "No device connected");
+                         }
+                     }
+                 });
+                 ((Button)findViewById(R.id.dx_minus_button)).setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         if (mouseSender != null) {
+                             mouseSender.sendTestLeftMove();
+                         } else {
+                             Log.i("Test", "No device connected");
+                         }
+                     }
+                 });
+                 ((Button)findViewById(R.id.dx_plus_button)).setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         if (mouseSender != null) {
+                             mouseSender.sendTestRightMove();
                          } else {
                              Log.i("Test", "No device connected");
                          }

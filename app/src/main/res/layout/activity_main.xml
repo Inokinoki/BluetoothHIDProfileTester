@@ -16,5 +16,25 @@
         app:layout_constraintTop_toTopOf="parent"
 
         android:text="Left Click"/>
+    <Button
+        android:id="@+id/dx_minus_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/left_button"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:text="Left"/>
+    <Button
+        android:id="@+id/dx_plus_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/left_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:text="Right"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
